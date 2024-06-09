@@ -23,11 +23,21 @@ app.post('/sum', async (req, res) => {
     })
 })
 
-app.post('/multiply', (req, res) => {
+app.post('/multiply', async (req, res) => {
     const { a,b } = req.body;
     const result = a*b;
+
+    const request = await prismaClient.operation.create({
+        data: {
+            a: a,
+            b: b,
+            answer: result,
+            type: "Multiply"
+        }
+    })
     res.json({
-        answer: result
+        answer: result,
+        id: request.id
     })
 })
 
