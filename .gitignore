@@ -1,0 +1,6 @@
+#github workflows
+.github
+# build
+dist
+# dependecies
+node_modules
