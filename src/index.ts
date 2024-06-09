@@ -58,3 +58,34 @@ app.post('/tasks', async (req, res) => {
     })
 })
 
+app.post('/users', async (req, res) => {
+    const { name, email } = req.body;
+
+    const request = await prismaClient.user.create({
+        data:{
+            name: name,
+            email: email
+        }
+    });
+
+    return res.status(200).json({
+        id: request.id,
+        email: request.email
+    })
+})
+
+
+app.put('/tasks/:taskId/assign/:userId', async (req, res) => {
+    const { taskId, userId } = req.params;
+    const updatedTask = await prismaClient.task.update({
+        where: {
+            id: parseInt(taskId)
+        },
+        data: {
+            userId: parseInt(userId),
+            status: "assigned"
+        }
+    });
+
+    return res.status(200).json(updatedTask);
+})
