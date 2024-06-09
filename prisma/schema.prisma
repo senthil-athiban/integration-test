@@ -20,3 +20,11 @@ enum OperationType {
   Sum
   Multiply
 }
+
+
+model Task {
+  id Int @id @default(autoincrement())
+  title String
+  description String
+  completed Boolean
+}

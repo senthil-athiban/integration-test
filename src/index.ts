@@ -41,3 +41,20 @@ app.post('/multiply', async (req, res) => {
     })
 })
 
+app.post('/tasks', async (req, res) => {
+    const { title, description, completed } = req.body;
+
+    const request = await prismaClient.task.create({
+        data:{
+            title: title,
+            description: description,
+            completed: completed
+        }
+    });
+
+    return res.status(201).json({
+        id: request.id,
+        completed: request.completed
+    })
+})
+

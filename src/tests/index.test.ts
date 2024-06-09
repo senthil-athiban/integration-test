@@ -28,4 +28,15 @@ describe('POST /sum', () => {
     expect(status).toBe(200);
     expect(body).toEqual({answer: 2, id: expect.any(Number)});
   })
+
+  it('should return the task id and default status of completion as false', async () => {
+    const { status, body } = await request(app).post('/tasks').send({
+      title: "to code",
+      description: "to complete the integration test",
+      completed: false
+    });
+
+    expect(status).toBe(201);
+    expect(body).toEqual({id: expect.any(Number), completed: false});
+  })
 })
