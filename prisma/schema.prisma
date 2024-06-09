@@ -1,0 +1,22 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model Operation {
+  id Int @id @default(autoincrement())
+  a Int 
+  b Int 
+  answer Int
+  type OperationType
+}
+
+enum OperationType {
+  Sum
+  Multiply
+}
